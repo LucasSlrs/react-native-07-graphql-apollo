@@ -1,0 +1,16 @@
+{
+  "possibleTypes": {
+    "Edge": [
+      "ProductEdge"
+    ],
+    "Node": [
+      "Picture",
+      "Product",
+      "User"
+    ],
+    "NodeDeletable": [],
+    "Pagination": [
+      "ProductsPagination"
+    ]
+  }
+}

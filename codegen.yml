@@ -1,0 +1,54 @@
+overwrite: true
+schema: "https://wawa-graphql-example.herokuapp.com/graphql"
+documents: "src/**/*.gql"
+config:
+  scalars:
+    Date: Date
+    DateTime: Date
+    Currency: Currency
+    JSONObject: Record<string, any>
+generates:
+  src/graphql/generated/schema.json:
+    documents: "src/**/*.gql"
+    plugins:
+      - "introspection"
+
+  src/graphql/generated/types.ts:
+    documents: "src/**/*.gql"
+    plugins:
+      - add:
+          content:
+            - "/* eslint-disable */"
+      - "typescript"
+
+  src/graphql/generated/fragment-matcher.json:
+    documents: "src/**/*.gql"
+    plugins:
+      - "fragment-matcher"
+
+  src/graphql/generated/apollo-helpers.ts:
+    documents: "src/**/*.gql"
+    plugins:
+      - add:
+          content: "/* eslint-disable */"
+      - "typescript-apollo-client-helpers"
+
+  src/:
+    preset: near-operation-file
+    documents:
+      - "src/**/*.gql"
+    presetConfig:
+      baseTypesPath: graphql/generated/types
+    config:
+      reactApolloVersion: 3
+      addDocBlocks: true
+      pureMagicComment: true
+      nonOptionalTypename: true
+      useTypeImports: true
+      experimentalFragmentVariables: true
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+      - add:
+          content:
+            - "/* eslint-disable */"
