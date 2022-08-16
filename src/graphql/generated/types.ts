@@ -10,9 +10,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A field whose value is a Currency: https://en.wikipedia.org/wiki/ISO_4217. */
   Currency: Currency;
-  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: Date;
 };
 
@@ -24,11 +22,17 @@ export type Edge = {
 export type Mutation = {
   __typename?: 'Mutation';
   productCreate: ProductCreateOutput;
+  productLike: ProductLikeOutput;
 };
 
 
 export type MutationProductCreateArgs = {
   input: ProductCreateInput;
+};
+
+
+export type MutationProductLikeArgs = {
+  input: ProductLikeInput;
 };
 
 export type Node = {
@@ -77,6 +81,7 @@ export type Product = Node & {
   createdAt: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  likes: Scalars['Int'];
   name: Scalars['String'];
   owner: User;
   pictures: Array<Picture>;
@@ -102,6 +107,15 @@ export type ProductEdge = Edge & {
   __typename?: 'ProductEdge';
   cursor: Scalars['ID'];
   node: Product;
+};
+
+export type ProductLikeInput = {
+  id: Scalars['String'];
+};
+
+export type ProductLikeOutput = {
+  __typename?: 'ProductLikeOutput';
+  product: Product;
 };
 
 export type ProductsPagination = Pagination & {

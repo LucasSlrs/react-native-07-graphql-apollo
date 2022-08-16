@@ -5,9 +5,10 @@ export type EdgeFieldPolicy = {
 	cursor?: FieldPolicy<any> | FieldReadFunction<any>,
 	node?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('productCreate' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('productCreate' | 'productLike' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
-	productCreate?: FieldPolicy<any> | FieldReadFunction<any>
+	productCreate?: FieldPolicy<any> | FieldReadFunction<any>,
+	productLike?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type NodeKeySpecifier = ('createdAt' | 'id' | 'updatedAt' | NodeKeySpecifier)[];
 export type NodeFieldPolicy = {
@@ -48,11 +49,12 @@ export type PictureFieldPolicy = {
 	url?: FieldPolicy<any> | FieldReadFunction<any>,
 	width?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type ProductKeySpecifier = ('createdAt' | 'description' | 'id' | 'name' | 'owner' | 'pictures' | 'priceCurrency' | 'priceValue' | 'updatedAt' | ProductKeySpecifier)[];
+export type ProductKeySpecifier = ('createdAt' | 'description' | 'id' | 'likes' | 'name' | 'owner' | 'pictures' | 'priceCurrency' | 'priceValue' | 'updatedAt' | ProductKeySpecifier)[];
 export type ProductFieldPolicy = {
 	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
 	description?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	likes?: FieldPolicy<any> | FieldReadFunction<any>,
 	name?: FieldPolicy<any> | FieldReadFunction<any>,
 	owner?: FieldPolicy<any> | FieldReadFunction<any>,
 	pictures?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -68,6 +70,10 @@ export type ProductEdgeKeySpecifier = ('cursor' | 'node' | ProductEdgeKeySpecifi
 export type ProductEdgeFieldPolicy = {
 	cursor?: FieldPolicy<any> | FieldReadFunction<any>,
 	node?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type ProductLikeOutputKeySpecifier = ('product' | ProductLikeOutputKeySpecifier)[];
+export type ProductLikeOutputFieldPolicy = {
+	product?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type ProductsPaginationKeySpecifier = ('edges' | 'nodes' | 'pageInfo' | 'totalCount' | ProductsPaginationKeySpecifier)[];
 export type ProductsPaginationFieldPolicy = {
@@ -133,6 +139,10 @@ export type StrictTypedTypePolicies = {
 	ProductEdge?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | ProductEdgeKeySpecifier | (() => undefined | ProductEdgeKeySpecifier),
 		fields?: ProductEdgeFieldPolicy,
+	},
+	ProductLikeOutput?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | ProductLikeOutputKeySpecifier | (() => undefined | ProductLikeOutputKeySpecifier),
+		fields?: ProductLikeOutputFieldPolicy,
 	},
 	ProductsPagination?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | ProductsPaginationKeySpecifier | (() => undefined | ProductsPaginationKeySpecifier),

@@ -1,0 +1,19 @@
+fragment product on Product {
+  id
+  likes
+  name
+  pictures {
+    id
+    url
+  }
+  priceValue
+}
+
+mutation productLike($productId: String!) {
+  productLike(input: {id: $productId}) {
+    product{
+      id
+      likes
+    }
+  }
+}
